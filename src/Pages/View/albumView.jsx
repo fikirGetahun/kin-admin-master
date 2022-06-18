@@ -52,17 +52,22 @@ export default function AlbumView() {
   }
 
   var artName = [];
-  function getSingleArtist() {
+  function getSingleArtist(aid) {
     var art = [];
-    axios.get("http://34.76.194.211/api/media_crud/album/").then((data) => {
-      if (data.status == 200) {
-        art = data.data.artist_name;
-        // setSelArtist(data.data.artist_name);
-        artName = data.data.artist_name;
-      } else {
-        return "unknown Artist!";
-      }
-    });
+
+    axios
+      .get(`http://34.76.194.211/api/media_crud/artist/${aid}`)
+      .then((data) => {
+        if (data.status == 200) {
+          art = data.data[aid].artist_name;
+          // setSelArtist(data.data.);
+          // artName = data.data;
+          console.log(data.data[aid].artist_name, "dfddfdfdfdfdffddfdf");
+          return art;
+        } else {
+          return "unknown Artist!";
+        }
+      });
   }
   return (
     <div className="new">
@@ -86,10 +91,11 @@ export default function AlbumView() {
             <table className="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
                   <th scope="col">artist</th>
                   <th scope="col">Album Name</th>
                   <th scope="col">Album Discription</th>
+                  <th scope="col">Album Photo</th>
+
                   <th scope="col">Update</th>
                   <th scope="col">Delete</th>
                 </tr>
@@ -97,9 +103,18 @@ export default function AlbumView() {
               <tbody>
                 {albums.map((ke, index) => (
                   <tr key={ke.id}>
-                    <td>{artName[index]} </td>
+                    <td>
+                      {
+                        // (console.log(ke.artist, "sthis is is is "),
+                        getSingleArtist(ke.artist)
+                      }
+                      {}
+                    </td>
                     <td>{ke.album_name}</td>
                     <td>{ke.album_description}</td>
+                    <td>
+                      <img src={ke.album_cover} alt="" />
+                    </td>
                     <td>
                       <Link to={`/albumEdit/${ke.id}`}>
                         <button>UPdate</button>
