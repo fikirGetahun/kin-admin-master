@@ -61,12 +61,12 @@ const Sidebar = () => {
               <span>Artists</span>
             </li>
           </Link>
-          <Link to="/album" style={{ textDecoration: "none" }}>
+          {/* <Link to="/album" style={{ textDecoration: "none" }}>
             <li>
               <SiYoutubemusic className="icon" />
               <span>Album</span>
             </li>
-          </Link>
+          </Link> */}
           <Link to="/track" style={{ textDecoration: "none" }}>
             <li>
               <SiYoutubemusic className="icon" />
