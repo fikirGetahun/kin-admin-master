@@ -21,7 +21,7 @@ const TrackEdit = () => {
   const [status, setStatus] = useState();
 
   const [TRACKDATA, setTRACKDATA] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { trackId } = useParams();
 
   useEffect(() => {
@@ -33,10 +33,31 @@ const TrackEdit = () => {
     getAlbumOfArtist();
   }, [selectedArtist]);
 
+  var showIsLoading = [];
+
+  if (isLoading) {
+    showIsLoading = [];
+    showIsLoading.push(
+      <div>
+        <div class="d-flex align-items-center">
+          <strong>Loading...</strong>
+          <div
+            class="spinner-border ms-auto"
+            role="status"
+            // aria-hidden="true"
+          ></div>
+        </div>
+      </div>
+    );
+  } else {
+    showIsLoading = [];
+  }
+
   var stop = false;
 
   function submitTrack(e) {
     e.preventDefault();
+    setIsLoading(true);
     const trackData = new FormData();
 
     trackData.append("track_name", trakTitle);
@@ -53,6 +74,7 @@ const TrackEdit = () => {
       .then((res) => {
         if (res.status == 200) {
           setStatus("Track Posted Successfull");
+          setIsLoading(false);
         } else {
           setStatus(`error`);
         }
@@ -159,6 +181,12 @@ const TrackEdit = () => {
       });
   }
 
+  useEffect(() => {
+    setTrackTitle(TRACKDATA.track_name);
+    setTrackDesc(TRACKDATA.track_description);
+    setTrackFile(TRACKDATA.track_file);
+  }, [TRACKDATA]);
+
   function getTrackData() {
     axios
       .get(`http://34.76.194.211/api/media_crud/track/${trackId}`)
@@ -174,9 +202,6 @@ const TrackEdit = () => {
           console.log(res.data);
           //   setSelectedArtist(TRACKDATA)
           //   setSelectedAlbumName(TRACKDATA.)
-          setTrackTitle(TRACKDATA.track_name);
-          setTrackDesc(TRACKDATA.track_description);
-          setTrackFile(TRACKDATA.track_file);
         } else {
           setTRACKDATA("error!");
         }
@@ -289,6 +314,7 @@ const TrackEdit = () => {
                 </div>
 
                 <button type="submit">Add Track</button>
+                {showIsLoading}
               </form>
               <div>{statusOutputer}</div>
               {/* <span className="text text-success"></span> */}

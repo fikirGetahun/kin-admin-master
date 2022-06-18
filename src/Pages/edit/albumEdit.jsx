@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 const NewAlbumOnlyEdit = ({ inputs, title }) => {
   const { albumId } = useParams();
 
-  const [file, setFile] = useState("");
+  const [albumData, setAlbumData] = useState([]);
 
   const [artist, setArtist] = useState();
   const [album_name, setTitle] = useState();
@@ -19,8 +19,13 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
   const [status, setStatus] = useState();
   const [ArtistsX, setArtistsX] = useState([]);
   const [cover, setCover] = useState();
-  const [albumData, setAlbumData] = useState([]);
+
+  const [file, setFile] = useState("");
   const [EditArtist, setEditArtist] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  var ShowInput = [];
+  function changePhoto() {}
 
   function submitAlbum(e) {
     e.preventDefault();
@@ -37,6 +42,10 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
     mdata.append("album_description", album_description);
     mdata.append("artist", artist);
     mdata.append("album_cover", file);
+
+    if (file == null) {
+      setFile(albumData.album_cover);
+    }
 
     var mainData = {
       album_name: album_name,
@@ -96,11 +105,14 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
 
   function getArtistName() {
     axios
-      .get(`http://34.76.194.211/api/media_crud/album/${albumId}`)
+      .get(`http://34.76.194.211/api/media_crud/artist/${albumData.artist}`)
       .then((res) => {
         // ArtistsX = res.data;
         // setArtistsX(res.data);
-        setEditArtist(res.data);
+        if (res.status == 200) {
+          setEditArtist(res.data);
+          console.log(res.data);
+        }
         //   res.data.map(ke =>{
         //   })
 
@@ -111,11 +123,42 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
       });
   }
 
+  var showIsLoading = [];
+
+  if (isLoading) {
+    showIsLoading = [];
+    showIsLoading.push(
+      <div>
+        <div class="d-flex align-items-center">
+          <strong>Loading...</strong>
+          <div
+            class="spinner-border ms-auto"
+            role="status"
+            // aria-hidden="true"
+          ></div>
+        </div>
+      </div>
+    );
+  } else {
+    showIsLoading = [];
+  }
+
   useEffect(() => {
     getAlbumData();
+    // setTitle(albumData.album_name);
+    // setDesc(albumData.album_description);
+    // setFile(albumData.album_cover);
+    // setArtist(albumData.artist_name);
     getArtist();
     getArtistName();
   }, []);
+
+  useEffect(() => {
+    setTitle(albumData.album_name);
+    setDesc(albumData.album_description);
+    setFile(albumData.album_cover);
+    setArtist(albumData.artist_name);
+  }, [albumData]);
 
   var StateOutput = [];
 
@@ -131,19 +174,15 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
     StateOutput = [];
   }
 
-  function getAlbumData() {
-    axios
+  const getAlbumData = async () => {
+    await axios
       .get(`http://34.76.194.211/api/media_crud/album/${albumId}`)
       .then((data) => {
         if (data.status == 200) {
           setAlbumData(data.data);
-          setTitle(albumData.album_name);
-          setDesc(albumData.album_description);
-          setFile(albumData.album_cover);
-          setArtist(albumData.artist_name);
         }
       });
-  }
+  };
 
   return (
     <div className="new">
@@ -171,7 +210,7 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
                     }}
                     aria-label=".form-select example"
                   >
-                    <option value={EditArtist.id}>
+                    <option value={albumData.artist}>
                       {EditArtist.artist_name}
                     </option>
                     {ArtistsX.map((ke) => (
@@ -216,9 +255,12 @@ const NewAlbumOnlyEdit = ({ inputs, title }) => {
                   />
                 </div>
               </div>
+              {/* <button type="button" >Change Photo</button> */}
 
               <button type="submit">Edit Album</button>
+              {showIsLoading}
             </form>
+
             <div>{StateOutput}</div>
             {/* <span className="text text-success"></span> */}
           </div>

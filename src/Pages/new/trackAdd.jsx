@@ -19,6 +19,9 @@ const TrackAdd = () => {
   const [trackFile, setTrackFile] = useState();
   const [status, setStatus] = useState();
   const controller = new AbortController();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const getAlbumOfArtist = () => {
     axios
       .get(`http://34.76.194.211/api/media_crud/artist/${selectedArtist}`, {
@@ -30,6 +33,7 @@ const TrackAdd = () => {
         // ArtistsX = res.data;
         if (res.status == 200) {
           setSelectedArtistAlbumList(res.data["albums"]);
+          setIsLoading(false);
         } else {
         }
 
@@ -43,6 +47,26 @@ const TrackAdd = () => {
         //   ArtistsX.push("error");
       });
   };
+
+  var showIsLoading = [];
+
+  if (isLoading) {
+    showIsLoading = [];
+    showIsLoading.push(
+      <div>
+        <div class="d-flex align-items-center">
+          <strong>Loading...</strong>
+          <div
+            class="spinner-border ms-auto"
+            role="status"
+            // aria-hidden="true"
+          ></div>
+        </div>
+      </div>
+    );
+  } else {
+    showIsLoading = [];
+  }
 
   const getArtist = async () => {
     await axios
@@ -74,6 +98,7 @@ const TrackAdd = () => {
   }, [selectedArtist]);
   function submitTrack(e) {
     e.preventDefault();
+    setIsLoading(true);
     const trackData = new FormData();
 
     trackData.append("track_name", trakTitle);
@@ -87,6 +112,7 @@ const TrackAdd = () => {
       .then((res) => {
         if (res.status == 201) {
           setStatus("good");
+          setIsLoading(false);
         } else {
           setStatus(`error`);
         }
@@ -249,6 +275,7 @@ const TrackAdd = () => {
                 </div>
 
                 <button type="submit">Add Track</button>
+                {showIsLoading}
               </form>
               <div>{statusOutputer}</div>
               {/* <span className="text text-success"></span> */}

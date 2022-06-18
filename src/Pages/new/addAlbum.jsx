@@ -16,6 +16,28 @@ const NewAlbumOnly = ({ inputs, title }) => {
   const [status, setStatus] = useState();
   const [ArtistsX, setArtistsX] = useState([]);
   const [cover, setCover] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  var showIsLoading = [];
+
+  if (isLoading) {
+    showIsLoading = [];
+    showIsLoading.push(
+      <div>
+        <div class="d-flex align-items-center">
+          <strong>Loading...</strong>
+          <div
+            class="spinner-border ms-auto"
+            role="status"
+            // aria-hidden="true"
+          ></div>
+        </div>
+      </div>
+    );
+  } else {
+    showIsLoading = [];
+  }
+
   function submitAlbum(e) {
     e.preventDefault();
     const mainArtist = {
@@ -180,6 +202,7 @@ const NewAlbumOnly = ({ inputs, title }) => {
               </div>
 
               <button type="submit">Add Album</button>
+              {showIsLoading}
             </form>
             <div>{StateOutput}</div>
             {/* <span className="text text-success"></span> */}

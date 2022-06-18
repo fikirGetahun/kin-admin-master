@@ -43,7 +43,7 @@ const TrackList = () => {
     console.log(resp);
   };
   const handleDelete = async () => {
-    let endpt = BASE_URL + "/track/" + trackId;
+    let endpt = `${BASE_URL}/track/${trackId}/delete`;
     const resp = await Axios.delete(endpt);
     //http://34.78.10.124/artist/{artist_id}/
     alert("You have deleted the track");
@@ -72,13 +72,10 @@ const TrackList = () => {
                   <td>{trac.track_name}</td>
                   <td>{trac.track_description}</td>
 
-                  <td
-                    onClick={() => setArtistId(trac.track_id)}
-                    className="tbDButtn"
-                  >
+                  <td>
                     <button
-                      onClick={() => setArtistId(trac.track_id)}
-                      className="tbDButtn"
+                      onClick={() => setTrackId(trac.id)}
+                      className="btn btn-danger"
                     >
                       delete
                     </button>

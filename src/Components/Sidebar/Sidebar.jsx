@@ -79,12 +79,12 @@ const Sidebar = () => {
               <span>Add Track</span>
             </li>
           </Link>
-          <Link to="/trackEdit" style={{ textDecoration: "none" }}>
+          {/* <Link to="/trackEdit" style={{ textDecoration: "none" }}>
             <li>
               <SiYoutubemusic className="icon" />
-              <span>List Track</span>
+              <span>List Artist</span>
             </li>
-          </Link>
+          </Link> */}
 
           <p className="title">USEFUL</p>
           <li>
