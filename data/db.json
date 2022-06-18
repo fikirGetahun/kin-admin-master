@@ -1,0 +1,63 @@
+{
+  "album": [
+    {
+      "id": 0,
+      "album_id": 3,
+      "album_name": "sdjfjhsdf",
+      "artist": 3,
+      "album_genre": 2,
+      "album_cover": "http://34.140.167.224/media/album_id_3/b6.jpg",
+      "album_description": "sadgsfdhgf",
+      "album_release_date": "2022-06-16T10:33:05.322098Z"
+    },
+    {
+      "id": 1,
+      "album_id": 3,
+      "album_name": "sdjfjhsdf",
+      "artist": 3,
+      "album_genre": 2,
+      "album_cover": "http://34.140.167.224/media/album_id_3/b6.jpg",
+      "album_description": "sadgsfdhgf",
+      "album_release_date": "2022-06-16T10:33:05.322098Z"
+    },
+    {
+      "id": 2,
+      "album_id": 3,
+      "album_name": "sdjfjhsdf",
+      "artist": 3,
+      "album_genre": 2,
+      "album_cover": "http://34.140.167.224/media/album_id_3/b6.jpg",
+      "album_description": "sadgsfdhgf",
+      "album_release_date": "2022-06-16T10:33:05.322098Z"
+    },
+    {
+      "artist": "1",
+      "album_name": "sdf",
+      "desc": "dfs",
+      "id": 3
+    }
+  ],
+  "artist": [
+    {
+      "id": 3,
+      "artist_name": "",
+      "artist_photo": null,
+      "artist_description": "",
+      "albums": []
+    },
+    {
+      "id": 4,
+      "artist_name": "",
+      "artist_photo": null,
+      "artist_description": "",
+      "albums": []
+    },
+    {
+      "id": 5,
+      "artist_name": "",
+      "artist_photo": null,
+      "artist_description": "",
+      "albums": []
+    }
+  ]
+}

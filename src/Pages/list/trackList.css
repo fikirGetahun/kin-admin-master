@@ -1,0 +1,58 @@
+.list {
+    display: flex;
+    width: 100%;
+  }
+    .listContainer {
+      flex: 6;
+    }
+  .tableContainer{
+    border-collapse: collapse;
+    width: 100%;
+  
+  }
+  .tableContainer th, td{
+    border: 1px solid #dddd;
+    padding: 8px;
+  
+  }
+  .tableContainer .tr:nth-child(even){
+    background-color: #5555;
+  }
+  .tableContainer .tr:hover{
+    background-color: #888;
+  }
+  .tableContainer th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: whitesmoke;
+    color: black;
+  }
+  
+  .btnContainer{
+    background-color: rgb(186, 46, 190);
+    width: 120px;
+  }
+  .addbtn{
+    float:right;
+   
+    background-color: rgb(186, 46, 190);
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 12px;
+  
+  }
+  .tbDButtn{
+    cursor: pointer;
+    font-size: 14px;
+    color: darkslateblue;
+    padding: 3px;
+    background-color: red;
+  }
+  .tbUButtn{
+    cursor: pointer;
+    font-size: 14px;
+    background-color: greenyellow;
+    padding: 3px;
+  }
