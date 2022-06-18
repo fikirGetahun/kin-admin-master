@@ -59,11 +59,11 @@ export default function AlbumView() {
       .get(`http://34.76.194.211/api/media_crud/artist/${aid}`)
       .then((data) => {
         if (data.status == 200) {
-          art = data.data[aid].artist_name;
+          // art = data.data[`${aid}`].artist_name;
           // setSelArtist(data.data.);
           // artName = data.data;
-          console.log(data.data[aid].artist_name, "dfddfdfdfdfdffddfdf");
-          return art;
+          console.log(data.data, "dfddfdfdfdfdffddfdf");
+          return data.data.artist_name;
         } else {
           return "unknown Artist!";
         }

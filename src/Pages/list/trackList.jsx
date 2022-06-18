@@ -61,17 +61,22 @@ const TrackList = () => {
           </div>
           <table className="tableContainer">
             <tr className="tr">
-              <th>Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th colSpan="2">Action</th>
+              <th>Track Name</th>
+              <th>Description</th>
+              <th>Track</th>
+              <th>Update</th>
+              <th colSpan="2">Delete</th>
             </tr>
             {trackData.map((trac) => {
               return (
                 <tr key={trac.track_id} className="tr">
                   <td>{trac.track_name}</td>
                   <td>{trac.track_description}</td>
-
+                  <td>
+                    <audio controls>
+                      <source src={trac.track_file} type="audio/mpeg" />
+                    </audio>
+                  </td>
                   <td>
                     <button
                       onClick={() => setTrackId(trac.id)}
